@@ -387,6 +387,24 @@ header nav a:hover::after {
   transform: translateX(5px);
 }
 
+/* === START: CORRECTED VIDEO STYLES === */
+/* General style for the video player container in the Media section */
+.single-video-player {
+  max-width: 640px; /* Set a max-width for desktop */
+  margin: 0 auto; /* Center the player horizontally */
+  border-radius: var(--border-radius-lg);
+  overflow: hidden; /* Important for keeping the video within the rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* This targets the video/gif element itself to ensure it's responsive */
+.single-video-player video {
+  width: 100%; /* Make video fill its container */
+  height: auto; /* Maintain the correct aspect ratio */
+  display: block; /* Remove any potential bottom space under the video */
+}
+/* === END: CORRECTED VIDEO STYLES === */
+
 /* Videos */
 .video-grid {
   display: grid;
@@ -419,27 +437,26 @@ header nav a:hover::after {
   border: 0;
 }
 
-/* START: New Styles for Media Social Links */
+/* Styles for Media Social Links */
 .media-socials {
-  margin-top: 40px; /* Adds space between the video and the buttons */
+  margin-top: 40px;
   display: flex;
   justify-content: center;
-  gap: 20px; /* Controls the space between the buttons */
-  flex-wrap: wrap; /* Ensures buttons stack nicely on mobile */
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .media-socials .cta-btn i {
-  font-size: 1.2em; /* Makes the icons a little bigger */
+  font-size: 1.2em;
 }
-/* END: New Styles */
 
 /* Join Section */
 .join-section {
-  padding: 100px 20px; /* More padding for a grander feel */
+  padding: 100px 20px;
   border-radius: var(--border-radius-lg);
   margin: 80px auto;
   max-width: var(--max-width-content);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 10px rgba(255, 255, 255, 0.05) inset; /* Inner border glow */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 10px rgba(255, 255, 255, 0.05) inset;
 }
 
 .join-section h2 {
@@ -533,12 +550,12 @@ footer {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8); /* Darker overlay */
-  display: flex; /* Always display */
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000; /* Higher z-index to be on top of everything */
-  opacity: 0; /* Hidden by default */
+  z-index: 2000;
+  opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
@@ -553,11 +570,11 @@ footer {
   padding: 30px;
   border-radius: var(--border-radius-lg);
   width: 90%;
-  max-width: 450px; /* Slightly larger modal */
+  max-width: 450px;
   text-align: center;
   position: relative;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  transform: scale(0.9); /* Start slightly smaller for animation */
+  transform: scale(0.9);
   transition: transform 0.3s ease;
 }
 
@@ -580,7 +597,7 @@ footer {
   padding: 12px;
   border-radius: var(--border-radius-md);
   border: none;
-  background: rgba(255, 255, 255, 0.08); /* Lighter background for options */
+  background: rgba(255, 255, 255, 0.08);
   color: var(--text);
   cursor: pointer;
   font-weight: 500;
@@ -623,12 +640,7 @@ footer {
   color: var(--accent2);
 }
 
-/*
-==============================================
-==  NEW STYLES FOR TEXT INPUT IN QUIZ  ==
-==============================================
-*/
-
+/* STYLES FOR TEXT INPUT IN QUIZ */
 .quiz-input-group {
   margin-top: 15px;
 }
@@ -670,36 +682,30 @@ footer {
   transform: translateY(-2px);
 }
 
-
 /* Responsive Media Queries */
 @media (max-width: 992px) {
   .hero-text h1 {
-    font-size: 3.5em; /* Decrease font size for tablets */
+    font-size: 3.5em;
   }
-
   .hero-text .subtitle {
     font-size: 1.3em;
   }
-
   .about-grid {
     grid-template-columns: 1fr;
     text-align: center;
   }
-
   .about-image {
     margin-top: 40px;
   }
 }
 
 @media (max-width: 768px) {
-  /* Mobile Navigation */
   .menu-toggle {
-    display: block; /* Show hamburger menu */
-    z-index: 1001; /* Ensure it's above the nav */
+    display: block;
+    z-index: 1001;
   }
-
   .main-nav {
-    display: none; /* Hide nav by default */
+    display: none;
     flex-direction: column;
     position: absolute;
     top: 0;
@@ -710,67 +716,46 @@ footer {
     justify-content: center;
     align-items: center;
   }
-
   .main-nav.active {
-    display: flex; /* Show when active */
+    display: flex;
   }
-
   header nav a {
     margin: 20px 0;
     font-size: 1.5em;
   }
-
   .quiz-btn {
-    display: none; /* Optionally hide quiz button in mobile nav view */
+    display: none;
   }
-
   .nav-actions {
     display: flex;
     align-items: center;
   }
-
-  /* Hero Section */
   .hero-text h1 {
-    font-size: 2.8em; /* Further reduce font size for mobile */
+    font-size: 2.8em;
     line-height: 1.2;
   }
-
   .hero-text .subtitle {
     font-size: 1.1em;
   }
-
   .hero-cta-buttons {
     flex-direction: column;
     align-items: center;
     gap: 15px;
   }
-
   .cta-btn {
     width: 80%;
     justify-content: center;
   }
-
-  /* Other Sections */
   .section-padded {
     padding: 60px 0;
   }
-
-  /* START: THIS IS THE ONLY NEW CODE BLOCK */
-  .single-video-player video {
-    max-width: 100%; /* Ensures the video is never wider than its container */
-    height: auto;    /* Maintains the aspect ratio of the video */
-  }
-  /* END: THIS IS THE ONLY NEW CODE BLOCK */
-
   .join-section h2 {
     font-size: 2.2em;
   }
-
   .footer-grid {
     grid-template-columns: 1fr;
     text-align: center;
   }
-
   .social-links {
     justify-content: center;
   }
@@ -780,16 +765,13 @@ footer {
   .hero-text h1 {
     font-size: 2.2em;
   }
-
   .hero-text .subtitle {
     font-size: 1em;
   }
-
   .cta-btn.large {
     padding: 14px 28px;
     font-size: 1em;
   }
-
   .project-card h3 {
     font-size: 1.3em;
   }
