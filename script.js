@@ -1,6 +1,14 @@
 // Init AOS
 document.addEventListener("DOMContentLoaded", () => {
   AOS.init({ duration:700, once:true });
+
+  // Mobile Menu Toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
+
+  menuToggle.addEventListener('click', () => {
+    mainNav.classList.toggle('active');
+  });
 });
 
 // Quiz Logic
@@ -33,9 +41,14 @@ function renderQuiz(){
 }
 
 function openModal(){
-  document.getElementById("quizModal").style.display="flex"; 
-  idx=0; answers={}; renderQuiz();
+  const modal = document.getElementById("quizModal");
+  modal.classList.add('active');
+  idx=0;
+  answers={};
+  renderQuiz();
 }
+
 function closeModal(){
-  document.getElementById("quizModal").style.display="none";
+  const modal = document.getElementById("quizModal");
+  modal.classList.remove('active');
 }
