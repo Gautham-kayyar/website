@@ -623,6 +623,54 @@ footer {
   color: var(--accent2);
 }
 
+/*
+==============================================
+==  NEW STYLES FOR TEXT INPUT IN QUIZ  ==
+==============================================
+*/
+
+.quiz-input-group {
+  margin-top: 15px;
+}
+
+.quiz-input-group input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--border-radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.quiz-input-group input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent2);
+}
+
+.quiz-input-group button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--border-radius-md);
+  border: none;
+  background: var(--grad);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1em;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.quiz-input-group button:hover {
+  background: var(--grad-hover);
+  transform: translateY(-2px);
+}
+
+
 /* Responsive Media Queries */
 @media (max-width: 992px) {
   .hero-text h1 {
@@ -707,6 +755,13 @@ footer {
     padding: 60px 0;
   }
 
+  /* START: THIS IS THE ONLY NEW CODE BLOCK */
+  .single-video-player video {
+    max-width: 100%; /* Ensures the video is never wider than its container */
+    height: auto;    /* Maintains the aspect ratio of the video */
+  }
+  /* END: THIS IS THE ONLY NEW CODE BLOCK */
+
   .join-section h2 {
     font-size: 2.2em;
   }
@@ -738,50 +793,4 @@ footer {
   .project-card h3 {
     font-size: 1.3em;
   }
-}
-/*
-==============================================
-==  NEW STYLES FOR TEXT INPUT IN QUIZ  ==
-==============================================
-*/
-
-.quiz-input-group {
-  margin-top: 15px;
-}
-
-.quiz-input-group input[type="text"] {
-  width: 100%;
-  padding: 12px;
-  border-radius: var(--border-radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text);
-  font-family: 'Poppins', sans-serif;
-  font-size: 1em;
-  margin-bottom: 15px;
-  transition: border-color 0.3s ease;
-}
-
-.quiz-input-group input[type="text"]:focus {
-  outline: none;
-  border-color: var(--accent2);
-}
-
-.quiz-input-group button {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  border-radius: var(--border-radius-md);
-  border: none;
-  background: var(--grad);
-  color: #fff;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 1em;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.quiz-input-group button:hover {
-  background: var(--grad-hover);
-  transform: translateY(-2px);
 }
