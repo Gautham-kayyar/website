@@ -100,7 +100,7 @@ function renderQuiz() {
       body: JSON.stringify(answers),
     })
     .then(response => {
-      body.innerHTML = response.ok 
+      body.innerHTML = response.ok
         ? `<p>Thanks for completing! 🎉<br>Your response has been submitted.</p>`
         : `<p>Sorry, there was an error submitting your response. Please try again later.</p>`;
     })
