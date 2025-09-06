@@ -262,6 +262,14 @@ header nav a:hover::after {
   padding: 20px;
 }
 
+.hero-logo {
+  display: block; /* Centers the image */
+  margin: 0 auto 30px auto; /* Centers horizontally and adds bottom margin */
+  max-width: 180px; /* Adjust as needed */
+  height: auto;
+  filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.4)); /* Subtle glow */
+}
+
 .hero-text h1 {
   font-size: 4.5em;
   font-weight: 800;
@@ -798,6 +806,11 @@ footer {
   .social-links {
     justify-content: center;
   }
+
+  .hero-logo {
+    max-width: 120px; /* Smaller on mobile */
+    margin-bottom: 20px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -813,5 +826,9 @@ footer {
   }
   .project-card h3 {
     font-size: 1.3em;
+  }
+  .hero-logo {
+    max-width: 100px; /* Even smaller on very small screens */
+    margin-bottom: 15px;
   }
 }
