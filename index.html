@@ -34,6 +34,9 @@
   <!-- Hero -->
   <section class="hero" id="hero">
     <div class="hero-bg"></div>
+    <img src="assets/paperplane.webp" alt="Animated Paper Plane" class="paper-plane-animation">
+    <!-- NEW: Container for flight texts -->
+    <div class="flight-text-container"></div>
     <div class="hero-content">
       <img src="assets/saosc logo.png" alt="SAOSC Logo" class="hero-logo" data-aos="fade-down" data-aos-duration="1000">
       <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
@@ -69,7 +72,7 @@
       <div class="projects-grid">
         <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
           <div class="project-thumbnail">
-            <img src="assets/saosc logo.png" alt="CubeSat project">
+            <img src="assets/cubesat (1).jpeg" alt="CubeSat project">
           </div>
           <h3>CubeSat for Real-Time Weather Prediction</h3>
           <p>Developing miniature satellites for atmospheric research, real-time data streaming, and high-resolution Earth observation.</p>
@@ -113,7 +116,7 @@
           <div class="swiper-slide">
             <div class="activity-card">
               <div class="activity-thumbnail">
-                <img src="assets/drone banner drop.jpeg" alt="DRONE BANNER DROP">
+                <img src="assets/drone banner drop.jpeg" alt="DRONE BASED BANNER DROP">
               </div>
               <h3>DRONE BASED BANNER DROP</h3>
               <p>Recently we had Planned, Built and Executed a Drone Based Banner Drop for the Club of Nexus</p>
@@ -131,18 +134,18 @@
           <div class="swiper-slide">
             <div class="activity-card">
               <div class="activity-thumbnail">
-                <img src="https://via.placeholder.com/400x250/3e404b/f5f6fa?text=Guest+Lecture" alt="Guest Lecture">
+                <img src="assets/pa collage.jpeg" alt="pa collage">
               </div>
-              <h3>Industry Guest Lectures</h3>
+              <h3>INTERNATIONAL CONFERENCE AT PACE COLLAGE</h3>
               <p>Inviting professionals from the aerospace industry to share their knowledge and experience with our members.</p>
             </div>
           </div>
           <div class="swiper-slide">
             <div class="activity-card">
               <div class="activity-thumbnail">
-                <img src="https://via.placeholder.com/400x250/3e404b/f5f6fa?text=Outreach" alt="Outreach">
+                <img src="assets/hackathon.jpeg" alt="hackathon">
               </div>
-              <h3>Community Outreach</h3>
+              <h3>SRINATHON 2024</h3>
               <p>Organizing events and sessions for junior students to ignite their passion for aerospace and technology.</p>
             </div>
           </div>
@@ -245,5 +248,43 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
+
+  <!-- NEW: Script for "Wheeee!" text animation -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const plane = document.querySelector('.paper-plane-animation');
+      const textContainer = document.querySelector('.flight-text-container');
+      const showFlightText = true; // Set to false to easily disable text animation
+
+      if (plane && textContainer && showFlightText) {
+        setInterval(() => {
+          const rect = plane.getBoundingClientRect();
+          const heroRect = document.getElementById('hero').getBoundingClientRect();
+
+          // Calculate position relative to the hero section for the text container
+          // Adjust for tip position (top-right of the plane image)
+          const textX = rect.right - heroRect.left; // Right edge of plane
+          const textY = rect.top - heroRect.top;   // Top edge of plane
+
+          // Only spawn text when the plane is somewhat visible on screen
+          if (textX > -50 && textX < heroRect.width + 50) { // Give a little buffer
+            const flightText = document.createElement('span');
+            flightText.textContent = "";
+            flightText.className = 'flight-text';
+            // Offset text slightly from the exact tip for better visual
+            flightText.style.left = `${textX - 10}px`;
+            flightText.style.top = `${textY - 20}px`;
+
+            textContainer.appendChild(flightText);
+
+            // Remove the text element after its animation is done
+            flightText.addEventListener('animationend', () => {
+              flightText.remove();
+            });
+          }
+        }, 700); // Adjust interval (milliseconds) to spawn texts more or less frequently
+      }
+    });
+  </script>
 </body>
 </html>
