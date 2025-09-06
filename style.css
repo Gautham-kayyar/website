@@ -255,6 +255,89 @@ header nav a:hover::after {
   z-index: 1;
 }
 
+/* MODIFIED CODE FOR PAPER PLANE ANIMATION */
+.paper-plane-animation {
+  position: absolute;
+  width: 80px; /* Adjust size as needed */
+  height: auto;
+  opacity: 0.7; /* Make it slightly transparent */
+  pointer-events: none; /* Allows clicks to pass through to elements behind it */
+  animation: flyAcross 15s linear infinite; /* Adjust duration for speed */
+  z-index: 3; /* Ensure it's above hero-content (z-index: 2) and hero-bg (z-index: 1) */
+  filter: drop-shadow(0 0 5px rgba(0, 210, 255, 0.3)); /* Subtle glow */
+  mix-blend-mode: screen; /* Used to remove black background for white plane */
+  transform-origin: 100% 0%; /* Set rotation origin to top-right tip */
+}
+
+@keyframes flyAcross {
+  0% {
+    top: 40%;
+    left: -10%; /* Start off-screen left */
+    transform: rotate(5deg) scale(0.9) scaleX(1); /* Facing right */
+  }
+  49% {
+    top: 30%;
+    left: 110%; /* Off screen right */
+    transform: rotate(0deg) scale(1) scaleX(1); /* Still facing right */
+  }
+  50% { /* Instant flip as it crosses the boundary */
+    top: 30%;
+    left: 110%;
+    transform: rotate(0deg) scale(1) scaleX(-1); /* Flipped to face left */
+  }
+  99% {
+    top: 40%;
+    left: -10%; /* Off screen left */
+    transform: rotate(5deg) scale(0.9) scaleX(-1); /* Still facing left */
+  }
+  100% { /* Instant flip back to right for next loop iteration */
+    top: 40%;
+    left: -10%;
+    transform: rotate(5deg) scale(0.9) scaleX(1); /* Back to facing right for the next loop */
+  }
+}
+/* END MODIFIED CODE FOR PAPER PLANE ANIMATION */
+
+/* NEW: Styles for the flight text animation */
+.flight-text-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Crucial: allows interaction with elements beneath */
+  z-index: 4; /* Above the plane (z-index 3) but below interactive hero content */
+  overflow: hidden; /* Keep texts within hero boundaries */
+}
+
+.flight-text {
+  position: absolute;
+  color: var(--accent2); /* Or any color that stands out */
+  font-size: 1.2em;
+  font-weight: 600;
+  opacity: 0;
+  animation: fadeAndFloat 3s ease-out forwards; /* Adjust duration and timing */
+  white-space: nowrap; /* Keep "Wheeee!" on one line */
+  text-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
+  transform: translate(-50%, -50%); /* Center text based on its own dimensions */
+}
+
+@keyframes fadeAndFloat {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(0px) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(-10px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-50px) scale(1.2);
+  }
+}
+/* END NEW STYLES */
+
 .hero-content {
   position: relative;
   z-index: 2;
@@ -361,7 +444,6 @@ header nav a:hover::after {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
 }
 
 .project-card:hover .project-thumbnail img {
@@ -398,17 +480,17 @@ header nav a:hover::after {
 
 /* Video Player in Media Section */
 .single-video-player {
-  max-width: 640px; 
-  margin: 0 auto; 
+  max-width: 640px;
+  margin: 0 auto;
   border-radius: var(--border-radius-lg);
-  overflow: hidden; 
+  overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .single-video-player video {
-  width: 100%; 
-  height: auto; 
-  display: block; 
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Styles for Media Social Links */
@@ -811,6 +893,43 @@ footer {
     max-width: 120px; /* Smaller on mobile */
     margin-bottom: 20px;
   }
+
+  /* MODIFIED CODE FOR PAPER PLANE ANIMATION (MOBILE ADJUSTMENT) */
+  .paper-plane-animation {
+    width: 60px; /* Smaller on mobile */
+    animation: flyAcrossMobile 12s linear infinite; /* Potentially different path/speed */
+    mix-blend-mode: screen; /* Used to remove black background for white plane */
+    transform-origin: 100% 0%; /* Set rotation origin to top-right tip */
+  }
+
+  @keyframes flyAcrossMobile {
+    0% {
+      top: 25%;
+      left: -15%;
+      transform: rotate(10deg) scale(0.8) scaleX(1); /* Facing right */
+    }
+    49% {
+      top: 35%;
+      left: 115%;
+      transform: rotate(0deg) scale(0.9) scaleX(1); /* Still facing right */
+    }
+    50% { /* Instant flip as it crosses the boundary */
+      top: 35%;
+      left: 115%;
+      transform: rotate(0deg) scale(0.9) scaleX(-1); /* Flipped to face left */
+    }
+    99% {
+      top: 25%;
+      left: -15%;
+      transform: rotate(10deg) scale(0.8) scaleX(-1); /* Still facing left */
+    }
+    100% { /* Instant flip back to right for next loop iteration */
+      top: 25%;
+      left: -15%;
+      transform: rotate(10deg) scale(0.8) scaleX(1); /* Back to facing right for the next loop */
+    }
+  }
+  /* END MODIFIED CODE FOR PAPER PLANE ANIMATION (MOBILE ADJUSTMENT) */
 }
 
 @media (max-width: 480px) {
@@ -831,4 +950,11 @@ footer {
     max-width: 100px; /* Even smaller on very small screens */
     margin-bottom: 15px;
   }
+  /* MODIFIED CODE FOR PAPER PLANE ANIMATION (VERY SMALL MOBILE ADJUSTMENT) */
+  .paper-plane-animation {
+    width: 40px;
+    mix-blend-mode: screen; /* Used to remove black background for white plane */
+    transform-origin: 100% 0%; /* Set rotation origin to top-right tip */
+  }
+  /* END MODIFIED CODE FOR PAPER PLANE ANIMATION (VERY SMALL MOBILE ADJUSTMENT) */
 }
