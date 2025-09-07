@@ -41,6 +41,49 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// PROJECT MODAL LOGIC
+function openProjectModal(projectId) {
+  console.log('Opening modal for:', projectId); // Debug log
+  const modal = document.getElementById(projectId + 'Modal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    console.log('Modal opened successfully'); // Debug log
+  } else {
+    console.error('Modal not found:', projectId + 'Modal'); // Debug log
+  }
+}
+
+function closeProjectModal(projectId) {
+  console.log('Closing modal for:', projectId); // Debug log
+  const modal = document.getElementById(projectId + 'Modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    console.log('Modal closed successfully'); // Debug log
+  } else {
+    console.error('Modal not found:', projectId + 'Modal'); // Debug log
+  }
+}
+
+// Close modal when clicking outside the content
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('project-modal')) {
+    const modalId = e.target.id.replace('Modal', '');
+    closeProjectModal(modalId);
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const activeModals = document.querySelectorAll('.project-modal.active');
+    activeModals.forEach(modal => {
+      const modalId = modal.id.replace('Modal', '');
+      closeProjectModal(modalId);
+    });
+  }
+});
 
 // QUIZ LOGIC
 const questions = [
@@ -117,30 +160,18 @@ function renderQuiz() {
   }
 }
 
-
-// MODAL LOGIC
+// MODAL LOGIC (for quiz)
 const quizModal = document.getElementById("quizModal");
 function openModal() {
   quizModal.classList.add('active');
   idx = 0;
   answers = {};
   renderQuiz();
+  // Prevent body scroll when modal is open
+  document.body.style.overflow = 'hidden';
 }
 function closeModal() {
   quizModal.classList.remove('active');
-}
-
-// CHANGED: Project Description Toggle Function
-function toggleProjectDescription(button) {
-  const descriptionWrapper = button.previousElementSibling; // The div wrapping the paragraph
-  const isExpanded = button.dataset.expanded === 'true';
-
-  descriptionWrapper.classList.toggle('expanded');
-  button.dataset.expanded = !isExpanded;
-
-  if (isExpanded) {
-    button.innerHTML = 'Learn More <i class="fas fa-arrow-right"></i>';
-  } else {
-    button.innerHTML = 'Show Less <i class="fas fa-arrow-up"></i>';
-  }
+  // Restore body scroll
+  document.body.style.overflow = 'auto';
 }
