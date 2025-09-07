@@ -129,3 +129,18 @@ function openModal() {
 function closeModal() {
   quizModal.classList.remove('active');
 }
+
+// CHANGED: Project Description Toggle Function
+function toggleProjectDescription(button) {
+  const descriptionWrapper = button.previousElementSibling; // The div wrapping the paragraph
+  const isExpanded = button.dataset.expanded === 'true';
+
+  descriptionWrapper.classList.toggle('expanded');
+  button.dataset.expanded = !isExpanded;
+
+  if (isExpanded) {
+    button.innerHTML = 'Learn More <i class="fas fa-arrow-right"></i>';
+  } else {
+    button.innerHTML = 'Show Less <i class="fas fa-arrow-up"></i>';
+  }
+}
