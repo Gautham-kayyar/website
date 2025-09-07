@@ -249,7 +249,7 @@ header nav a:hover::after {
   height: 100%;
   background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.2) 0%, transparent 40%),
               radial-gradient(circle at bottom right, rgba(0, 210, 255, 0.15) 0%, transparent 50%),
-              url('assets/hero_banner.jpg') center center / cover no-repeat;
+              var(--bg-darker);
   opacity: 0.7;
   transform: scale(1.05);
   z-index: 1;
@@ -421,12 +421,13 @@ header nav a:hover::after {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px);
   border-radius: var(--border-radius-lg);
-  overflow: hidden; /* Ensure content doesn't overflow when card is not expanded */
+  overflow: hidden;
   text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack children vertically */
+  display: flex;
+  flex-direction: column;
+  min-height: 400px; /* UPDATED: Ensure minimum height */
 }
 
 .project-card:hover {
@@ -460,23 +461,18 @@ header nav a:hover::after {
   padding: 0 20px;
 }
 
-/* CHANGED: Project description styling for expand/collapse */
+/* UPDATED: Project description styling - simplified for modal approach */
 .project-description-wrapper {
-  max-height: 100px; /* Initial height for collapsed text (~5 lines @ 0.95em, 1.6 line-height) */
+  max-height: 100px;
   overflow: hidden;
   position: relative;
-  margin-bottom: 15px; /* Spacing between text and "Learn More" button */
-  padding: 0 20px; /* Match existing paragraph padding */
-  transition: max-height 0.5s ease-out; /* Smooth expansion/collapse */
-}
-
-.project-description-wrapper.expanded {
-  max-height: 1000px; /* Sufficiently large height for full content. Adjust if content is extremely long. */
-  overflow: visible;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  flex-grow: 1;
 }
 
 .project-description-wrapper p {
-  margin-bottom: 0; /* Remove default paragraph margin within the wrapper */
+  margin-bottom: 0;
 }
 
 /* Fade-out effect for collapsed text */
@@ -484,26 +480,25 @@ header nav a:hover::after {
   content: "";
   position: absolute;
   bottom: 0;
-  left: 20px; /* Match wrapper padding */
-  right: 20px; /* Match wrapper padding */
-  height: 40px; /* Height of the gradient fade */
+  left: 20px;
+  right: 20px;
+  height: 40px;
   background: linear-gradient(to top, var(--bg-darker) 0%, transparent 100%);
-  pointer-events: none; /* Allow text selection/interaction beneath */
-  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-.project-description-wrapper.expanded::after {
-  opacity: 0; /* Hide fade effect when expanded */
-}
-
+/* UPDATED: Project link positioning - now opens modal */
 .project-link {
   display: inline-block;
   color: var(--accent2);
   font-weight: 600;
-  margin-left: 20px;
-  margin-bottom: 20px;
+  margin: 0 20px 20px 20px;
+  padding: 8px 0;
   transition: color 0.3s ease, transform 0.3s ease;
-  margin-top: auto; /* Push the "Learn More" link to the bottom */
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  cursor: pointer;
 }
 
 .project-link:hover {
