@@ -421,10 +421,12 @@ header nav a:hover::after {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px);
   border-radius: var(--border-radius-lg);
-  overflow: hidden;
+  overflow: hidden; /* Ensure content doesn't overflow when card is not expanded */
   text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
 }
 
 .project-card:hover {
@@ -458,11 +460,40 @@ header nav a:hover::after {
   padding: 0 20px;
 }
 
-.project-card p {
-  font-size: 0.95em;
-  color: var(--muted);
-  margin-bottom: 15px;
-  padding: 0 20px;
+/* CHANGED: Project description styling for expand/collapse */
+.project-description-wrapper {
+  max-height: 100px; /* Initial height for collapsed text (~5 lines @ 0.95em, 1.6 line-height) */
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 15px; /* Spacing between text and "Learn More" button */
+  padding: 0 20px; /* Match existing paragraph padding */
+  transition: max-height 0.5s ease-out; /* Smooth expansion/collapse */
+}
+
+.project-description-wrapper.expanded {
+  max-height: 1000px; /* Sufficiently large height for full content. Adjust if content is extremely long. */
+  overflow: visible;
+}
+
+.project-description-wrapper p {
+  margin-bottom: 0; /* Remove default paragraph margin within the wrapper */
+}
+
+/* Fade-out effect for collapsed text */
+.project-description-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 20px; /* Match wrapper padding */
+  right: 20px; /* Match wrapper padding */
+  height: 40px; /* Height of the gradient fade */
+  background: linear-gradient(to top, var(--bg-darker) 0%, transparent 100%);
+  pointer-events: none; /* Allow text selection/interaction beneath */
+  transition: opacity 0.3s ease;
+}
+
+.project-description-wrapper.expanded::after {
+  opacity: 0; /* Hide fade effect when expanded */
 }
 
 .project-link {
@@ -472,6 +503,7 @@ header nav a:hover::after {
   margin-left: 20px;
   margin-bottom: 20px;
   transition: color 0.3s ease, transform 0.3s ease;
+  margin-top: auto; /* Push the "Learn More" link to the bottom */
 }
 
 .project-link:hover {
@@ -522,7 +554,7 @@ header nav a:hover::after {
   overflow: hidden;
   text-align: left;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  height: 100%;
+  height: 100%; /* Keep this for activity cards, they don't have the same long text issue */
   transition: all 0.3s ease;
 }
 
